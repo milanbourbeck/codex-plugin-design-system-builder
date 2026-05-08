@@ -1,0 +1,40 @@
+{
+  "name": "design-system-builder",
+  "version": "1.0.0",
+  "description": "Creates reusable design tokens, UI components, section patterns, and documentation for consistent premium frontend projects.",
+  "author": {
+    "name": "Milan Bourbeck",
+    "url": "https://github.com/milanbourbeck"
+  },
+  "homepage": "https://github.com/milanbourbeck/codex-plugin-design-system-builder",
+  "repository": "https://github.com/milanbourbeck/codex-plugin-design-system-builder",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "plugin",
+    "frontend",
+    "ui",
+    "ux",
+    "quality"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Design System Builder",
+    "shortDescription": "Creates reusable design tokens, UI components, section patterns, and documentation for consistent premium frontend projects.",
+    "longDescription": "Creates reusable design tokens, UI components, section patterns, and documentation for consistent premium frontend projects.",
+    "developerName": "Milan Bourbeck",
+    "category": "Design",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Execute"
+    ],
+    "websiteURL": "https://github.com/milanbourbeck/codex-plugin-design-system-builder",
+    "brandColor": "#2563EB",
+    "defaultPrompt": [
+      "Build design tokens.",
+      "Create reusable components.",
+      "Set up docs only when needed."
+    ]
+  }
+}
