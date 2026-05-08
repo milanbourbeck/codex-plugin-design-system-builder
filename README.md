@@ -2,45 +2,62 @@
 
 ## Purpose
 
-Design token, component standard, and reusable section workflows for Vanilla HTML and Tailwind projects.
+Design tokens, reusable UI components, section patterns, component documentation, and design system foundation workflows.
 
 ## Included Skills
 
-- `build-design-system-foundation`
-- `create-component-library`
-- `storybook-optional-setup`
+- `$tokens`
+- `$components`
+- `$storybook`
+
+## Quick Commands
+
+- @ds $tokens — build design system foundation
+- @ds $components — create reusable components
+- @ds $storybook — set up Storybook when explicitly requested
 
 ## When To Use
 
-- A project needs consistent UI primitives.
-- Repeated section patterns should be standardized.
-- The user explicitly wants Storybook or docs tooling.
+- Use `@ds` when you want this plugin's focused workflow.
+- Use the short skill handles with `$` for explicit control.
+- Use implicit selection when the request matches a skill description.
 
 ## When Not To Use
 
-- The task is a one-off visual tweak.
-- A design system already exists and only needs a tiny fix.
-- Storybook was not requested and would add overhead.
+- Do not use this plugin outside its focused domain.
+- Do not rely on keywords as invocation aliases.
+- Do not add dependencies unless the underlying skill explicitly supports implementation and the project needs them.
 
 ## Installation
 
-Install this plugin from the Premium Codex Workflows marketplace, or add this repository directly as a Git-backed plugin source.
+Install this plugin from the Premium Codex Workflows marketplace.
 
 Repository: `https://github.com/milanbourbeck/codex-plugin-design-system-builder.git`
 
 ## Example Prompts
 
-- `@premium-html-uiux integriere den Premium HTML UI/UX Stack in dieses Vanilla HTML Projekt. Installiere nur, was wirklich gebraucht wird.`
-- `$modernize-existing-html-ui analysiere diese Website und verbessere UI, Responsiveness, Semantik und Fokuszustände minimal-invasiv.`
-- `$visual-qa-playwright prüfe die Seite in Desktop, Tablet und Mobile, dokumentiere Layout-Probleme und behebe die wichtigsten.`
-- `$accessibility-optimizer prüfe Navigation, Formulare, Dialoge, Fokuszustände und reduced-motion.`
-- `$performance-optimizer finde unnötige Bundle-Kosten, Bildprobleme, Layout Shifts und schwere Animationen.`
-- `$build-design-system-foundation erstelle eine konsistente Designsystem-Basis für dieses HTML/Tailwind Projekt.`
-- `$end-to-end-project-orchestrator bringe diese Landingpage von Ist-Zustand zu polished, tested und PR-ready.`
+1. `@dd $brief Create a strong visual direction for this landing page. Do not edit code yet.`
+2. `@dd $design-md Create a DESIGN.md source of truth for this project.`
+3. `@ui $stack Integrate the premium Vanilla HTML UI/UX stack. Install only what is actually needed.`
+4. `@ui $modernize Improve this existing HTML/CSS/JS UI with better hierarchy, responsiveness, semantics, and focus states.`
+5. `@qa $visual Test this frontend in desktop, tablet, and mobile viewports. Document issues and fix the most important ones.`
+6. `@qa $a11y Improve keyboard navigation, focus states, forms, dialogs, labels, and reduced-motion behavior.`
+7. `@qa $perf Find bundle, image, layout shift, font, and animation performance issues. Fix what is safe.`
+8. `@ship $e2e Take this frontend task from analysis to implementation, QA, polish, and PR-ready delivery.`
+
+## Migration Note
+
+- Old plugin repository names may stay unchanged.
+- New Codex plugin handle: `@ds`.
+- New skill handles use `$`.
+- `build-design-system-foundation` is now `$tokens`
+- `create-component-library` is now `$components`
+- `storybook-optional-setup` is now `$storybook`
+- If Codex does not show updates immediately, restart or reload Codex and reinstall or refresh the marketplace.
 
 ## Maintenance
 
-- Keep skills narrow and descriptions explicit.
+- Keep the plugin `name` field as the canonical handle.
+- Keep each skill folder name and frontmatter `name` in sync.
 - Bump `.codex-plugin/plugin.json` version for meaningful releases.
 - Run `node scripts/validate-plugin.mjs` before pushing.
-- Add dependencies to templates only when they are the default for that plugin's workflow.

@@ -3,6 +3,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const expectedPluginName = "ds";
+const expectedSkills = new Set([
+  "tokens",
+  "components",
+  "storybook"
+]);
 const fail = (message) => {
   console.error(message);
   process.exitCode = 1;
@@ -31,31 +37,45 @@ const manifest = fs.existsSync(manifestPath) ? readJson(manifestPath) : {};
 for (const key of ["name", "version", "description"]) {
   if (!manifest[key]) fail(`plugin.json is missing ${key}`);
 }
+if (manifest.name !== expectedPluginName) fail(`plugin.json name must be ${expectedPluginName}`);
 
 const skillsDir = path.join(root, "skills");
 if (!fs.existsSync(skillsDir)) fail("skills directory is missing");
+const seenSkills = new Set();
 for (const entry of fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir, { withFileTypes: true }) : []) {
   if (!entry.isDirectory()) continue;
-  const skillFile = path.join(skillsDir, entry.name, "SKILL.md");
+  const skillName = entry.name;
+  seenSkills.add(skillName);
+  if (!expectedSkills.has(skillName)) fail(`Unexpected skill folder: ${skillName}`);
+  const skillFile = path.join(skillsDir, skillName, "SKILL.md");
   if (!fs.existsSync(skillFile)) {
-    fail(`Skill ${entry.name} is missing SKILL.md`);
+    fail(`Skill ${skillName} is missing SKILL.md`);
     continue;
   }
   const text = fs.readFileSync(skillFile, "utf8");
   const match = text.match(/^---\n([\s\S]*?)\n---/);
   if (!match) {
-    fail(`Skill ${entry.name} is missing YAML frontmatter`);
+    fail(`Skill ${skillName} is missing YAML frontmatter`);
     continue;
   }
-  if (!/^name:\s*.+$/m.test(match[1])) fail(`Skill ${entry.name} frontmatter is missing name`);
-  if (!/^description:\s*.+$/m.test(match[1])) fail(`Skill ${entry.name} frontmatter is missing description`);
+  const nameMatch = match[1].match(/^name:\s*(.+)$/m);
+  if (!nameMatch) fail(`Skill ${skillName} frontmatter is missing name`);
+  if (nameMatch && nameMatch[1].trim() !== skillName) {
+    fail(`Skill ${skillName} frontmatter name must match folder name`);
+  }
+  if (!/^description:\s*.+$/m.test(match[1])) fail(`Skill ${skillName} frontmatter is missing description`);
 }
 
+for (const expected of expectedSkills) {
+  if (!seenSkills.has(expected)) fail(`Expected skill folder is missing: ${expected}`);
+}
+
+const placeholderPattern = new RegExp("\\b(" + "TO" + "DO|FIX" + "ME" + ")\\b");
 for (const file of walk(root)) {
   if (file.includes(`${path.sep}.git${path.sep}`)) continue;
-  const text = fs.readFileSync(file, "utf8");
-  const placeholderPattern = new RegExp("\\b(" + "TO" + "DO|FIX" + "ME" + ")\\b");
-  if (placeholderPattern.test(text)) fail(`Placeholder marker found in ${path.relative(root, file)}`);
+  if (placeholderPattern.test(fs.readFileSync(file, "utf8"))) {
+    fail(`Placeholder marker found in ${path.relative(root, file)}`);
+  }
 }
 
 if (!process.exitCode) console.log("Plugin validation passed.");

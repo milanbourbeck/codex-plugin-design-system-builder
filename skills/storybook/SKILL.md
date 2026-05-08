@@ -1,11 +1,15 @@
 ---
-name: build-design-system-foundation
-description: Use when the user wants to establish or improve a design system for HTML/Tailwind projects, including tokens, typography, spacing, buttons, forms, cards, nav, modals, and reusable sections.
+name: storybook
+description: Set up Storybook only when explicitly requested and justified.
 ---
 
-# build-design-system-foundation
+# storybook
 
-Use when the user wants to establish or improve a design system for HTML/Tailwind projects, including tokens, typography, spacing, buttons, forms, cards, nav, modals, and reusable sections.
+Use only when the user explicitly wants Storybook or component documentation tooling. Do not add Storybook automatically.
+
+## Handle Migration
+
+Canonical skill handle: `$storybook`. Legacy internal name: `storybook-optional-setup -> storybook`.
 
 ## Global Rules
 
@@ -23,9 +27,8 @@ Use when the user wants to establish or improve a design system for HTML/Tailwin
 
 ## Workflow
 
-1. Analyze existing styles, tokens, component patterns, Tailwind config, daisyUI usage, and HTML conventions.
-2. Define tokens for colors, typography, spacing, radius, shadow, and motion.
-3. Create standards for buttons, inputs, cards, navbar, modal/dialog, badges, pricing cards, feature sections, testimonials, and FAQ.
-4. Use Tailwind, daisyUI, and Web Awesome only where they fit the current stack.
-5. Build accessible responsive examples.
-6. Document usage, variants, constraints, validation checks, and known gaps.
+1. Confirm Storybook is explicitly requested or already present.
+2. Evaluate whether project size justifies docs tooling.
+3. Install the minimal Storybook setup only when justified.
+4. Add stories for central components rather than every small fragment.
+5. Document how to run the docs and what maintenance cost remains.

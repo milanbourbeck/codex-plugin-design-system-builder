@@ -1,11 +1,15 @@
 ---
-name: create-component-library
-description: Use when the user wants reusable frontend components or section templates for Vanilla HTML, Tailwind, daisyUI, Web Awesome, or static-site projects.
+name: components
+description: Create reusable Vanilla HTML, Tailwind, daisyUI, or Web Awesome components.
 ---
 
-# create-component-library
+# components
 
 Use when the user wants reusable frontend components or section templates for Vanilla HTML, Tailwind, daisyUI, Web Awesome, or static-site projects.
+
+## Handle Migration
+
+Canonical skill handle: `$components`. Legacy internal name: `create-component-library -> components`.
 
 ## Global Rules
 
